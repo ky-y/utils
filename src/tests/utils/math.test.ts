@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { sum, average, median } from "~/utils";
+import { average, median, sum } from "~/utils";
 
 test("Positive Testing: sum", () => {
     expect(sum(1, 5, 7, 8)).toBe(21);

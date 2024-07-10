@@ -1,8 +1,3 @@
-import { toFlatArray } from "~/utils/array";
-
-import { sort } from "~/libs/sort";
-
-
 export const deepEqual = (val1: unknown, val2: unknown): boolean => {
     const val1Type = typeof val1;
     const val2Type = typeof val2;

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { toFlatArray, range } from "~/utils";
+import { range, toFlatArray } from "~/utils";
 
 test("Positive Testing: range", () => {
     expect(range(5)).toStrictEqual([0, 1, 2, 3, 4]);
