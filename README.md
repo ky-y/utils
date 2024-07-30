@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is inspired by @antfu/utils.
+This project is inspired by [@antfu/utils](https://github.com/antfu/utils).
 
 ## Dependencies
 
