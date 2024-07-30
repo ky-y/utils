@@ -14,7 +14,8 @@
         "build:vite:watch": "vite build -w",
         "lint": "eslint \"./**/*.{js,ts,jsx,tsx}\"",
         "lint:fix": "eslint \"./**/*.{js,ts,jsx,tsx}\" --fix",
-        "test": "vitest"
+        "test": "vitest",
+        "prepare": "npm run build"
     },
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
