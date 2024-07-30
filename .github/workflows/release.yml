@@ -26,8 +26,9 @@ jobs:
                 with:
                     token: ${{ secrets.PAT }}
                     repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
-                    comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
                     body: |
+                        From Release Bot
+                        
                         The /release command requires one of major, minor, or patch.
                         
                         ```
