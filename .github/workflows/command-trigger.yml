@@ -13,7 +13,4 @@ jobs:
                 with:
                     token: ${{ secrets.PAT }}
                     commands: |
-                        major-release
-                        minor-release
-                        patch-release
                         release
