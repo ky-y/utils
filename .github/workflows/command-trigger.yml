@@ -16,3 +16,4 @@ jobs:
                         major-release
                         minor-release
                         patch-release
+                        release
