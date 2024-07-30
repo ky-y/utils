@@ -19,10 +19,6 @@ jobs:
         runs-on: ubuntu-latest
         if: ${{ !contains(fromJSON('["patch", "minor", "major"]'), (github.event.client_payload.slash_command.args.unnamed.arg1 || github.event.inputs.verUpType)) }}
         steps:
-            -   name: Dump the client payload context
-                env:
-                    PAYLOAD_CONTEXT: ${{ toJSON(github.event.client_payload) }}
-                run: echo "$PAYLOAD_CONTEXT"
 
             -   name: Failed Report
                 if: ${{ github.event.inputs.verUpType == '' }}
@@ -30,7 +26,7 @@ jobs:
                 with:
                     token: ${{ secrets.PAT }}
                     repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
-                    comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+                    issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
                     body: |
                         From Release Bot
                         
