@@ -1,4 +1,11 @@
 vite.config.ts
 .gitignore
 .github
+.eslintrc.cjs
+.eslintignore
+.gitattributes
+.yarnrc.yml
+
 .idea
+.yarn
+src/tests
