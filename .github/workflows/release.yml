@@ -86,7 +86,7 @@ jobs:
                 id: ver_up_type
                 run: |
                     ver_up_type=${{ github.event.client_payload.slash_command.args.unnamed.arg1 || github.event.inputs.veruptype }}
-                    echo "ver_up_type=$ver_up_type" >> $github_output
+                    echo "ver_up_type=$ver_up_type" >> $GITHUB_OUTPUT
 
             -   name: Publish Package to npmjs
                 run: |
@@ -102,7 +102,7 @@ jobs:
                 id: new-version
                 run: |
                     version=`npm view @ky-y./utils version`
-                    echo "version=$version" >> $github_output
+                    echo "version=$version" >> $GITHUB_OUTPUT
 
             -   name: Success Report
                 uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
