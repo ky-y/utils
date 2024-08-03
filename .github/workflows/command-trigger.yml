@@ -4,6 +4,9 @@ on:
     issue_comment:
         types: [ created ]
 
+env:
+    kyBOT-APP_ID: 960836
+
 jobs:
     slash-command-dispatch:
         runs-on: ubuntu-latest
@@ -12,8 +15,8 @@ jobs:
                 id: github-token
                 uses: actions/create-github-app-token@v1
                 with:
-                    app_id: 960836
-                    private_key: ${{ secrets.kyBOT_PRIVATE_KEY }}
+                    app-id: ${{ env.kyBOT-APP_ID }}
+                    private-key: ${{ secrets.kyBOT_PRIVATE_KEY }}
 
             -   name: Slash Command Dispatch
                 uses: peter-evans/slash-command-dispatch@13bc09769d122a64f75aa5037256f6f2d78be8c4 # v4.0.0
