@@ -89,20 +89,16 @@ jobs:
                     echo "ver_up_type=$ver_up_type" >> $GITHUB_OUTPUT
 
             -   name: Publish Package to npmjs
+                id: publish
                 run: |
                     git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
                     git config --local user.name "github-actions[bot]"
                     npm version `npm view @ky-y./utils version` --allow-same-version
-                    npm version ${{ steps.ver_up_type.outputs.VER_UP_TYPE }}
+                    version=`npm version ${{ steps.ver_up_type.outputs.VER_UP_TYPE }}`
                     npm publish --provenance
+                    echo "version=$version" >> $GITHUB_OUTPUT
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-            -   name: Get New Package Version
-                id: new-version
-                run: |
-                    version=`npm view @ky-y./utils version`
-                    echo "version=$version" >> $GITHUB_OUTPUT
 
             -   name: Success Report
                 uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
@@ -111,7 +107,7 @@ jobs:
                     repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
                     issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
                     body: |
-                        The release of v${{ steps.new-version.outputs.version }} was completed successfully.
+                        The release of v${{ steps.publish.outputs.version }} was completed successfully.
 
     failed:
         runs-on: ubuntu-latest
