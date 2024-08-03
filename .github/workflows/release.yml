@@ -20,16 +20,21 @@ jobs:
         if: ${{ !contains(fromJSON('["patch", "minor", "major"]'), (github.event.client_payload.slash_command.args.unnamed.arg1 || github.event.inputs.verUpType)) }}
         steps:
 
+            -   name: get github app token
+                id: github-token
+                uses: actions/create-github-app-token@v1
+                with:
+                    app_id: ${{ secrets.kybot-app_id }}
+                    private_key: ${{ secrets.kybot-private_key }}
+
             -   name: Failed Report
                 if: ${{ github.event.inputs.verUpType == '' }}
                 uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
                 with:
-                    token: ${{ secrets.PAT }}
+                    token: ${{ steps.github-token.outputs.token }}
                     repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
                     issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
                     body: |
-                        From Release Bot
-                        
                         The /release command requires one of major, minor, or patch.
                         
                         ```
@@ -40,7 +45,6 @@ jobs:
 
             -   name: Exit 2
                 run: exit 2
-    
 
     publish:
         runs-on: ubuntu-latest
@@ -57,6 +61,13 @@ jobs:
                     node-version: '22.x'
                     registry-url: 'https://registry.npmjs.org'
 
+            -   name: Get GitHub App Token
+                id: github-token
+                uses: actions/create-github-app-token@v1
+                with:
+                    app_id: ${{ secrets.kybot-app_id }}
+                    private_key: ${{ secrets.kybot-private_key }}
+
             -   name: Cache Dependencies
                 id: npm_cache
                 uses: actions/cache@v4
@@ -71,9 +82,8 @@ jobs:
             -   name: Get Version-Up Type
                 id: ver_up_type
                 run: |
-                    VER_UP_TYPE=${{ github.event.client_payload.slash_command.args.unnamed.arg1 || github.event.inputs.verUpType }}
-                    echo "VER_UP_TYPE=$VER_UP_TYPE" >> $GITHUB_OUTPUT
-
+                    ver_up_type=${{ github.event.client_payload.slash_command.args.unnamed.arg1 || github.event.inputs.veruptype }}
+                    echo "ver_up_type=$ver_up_type" >> $github_output
 
             -   name: Publish Package to npmjs
                 run: |
@@ -84,3 +94,48 @@ jobs:
                     npm publish --provenance
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            -   name: Get New Package Version
+                id: new-version
+                run: |
+                    version=`npm view @ky-y./utils version`
+                    echo "version=$version" >> $github_output
+
+            -   name: Success Report
+                uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
+                with:
+                    token: ${{ steps.github-token.outputs.token }}
+                    repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+                    issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+                    body: |
+                        The release of v${{ steps.new-version.outputs.version }} was completed successfully.
+
+    failed:
+        runs-on: ubuntu-latest
+        if: ${{ always() && contains(needs.*.result, 'failure') }}
+        needs:
+            publish
+        steps:
+            -   name: Get GitHub App Token
+                id: github-token
+                uses: actions/create-github-app-token@v1
+                with:
+                    app_id: ${{ secrets.kybot-app_id }}
+                    private_key: ${{ secrets.kybot-private_key }}
+
+            -   name: Get Action URL
+                id: action-url
+                run: |
+                    action-url=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+                    echo "action-url=actions-url" >> $github_output
+
+            -   name: Failed Report
+                uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
+                with:
+                    token: ${{ steps.github-token.outputs.token }}
+                    repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+                    issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+                    body: |
+                        The release failed. Please check the logs.
+                        
+                        ${{ steps.action-url.outputs.action-url }}
