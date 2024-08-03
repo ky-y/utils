@@ -12,7 +12,7 @@ jobs:
                 id: github-token
                 uses: actions/create-github-app-token@v1
                 with:
-                    app_id: ${{ secrets.kyBOT-APP_ID }}
+                    app_id: 960836
                     private_key: ${{ secrets.kyBOT-PRIVATE_KEY }}
 
             -   name: Slash Command Dispatch

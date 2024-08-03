@@ -24,7 +24,7 @@ jobs:
                 id: github-token
                 uses: actions/create-github-app-token@v1
                 with:
-                    app_id: ${{ secrets.kybot-app_id }}
+                    app_id: 960836
                     private_key: ${{ secrets.kybot-private_key }}
 
             -   name: Failed Report
@@ -65,7 +65,7 @@ jobs:
                 id: github-token
                 uses: actions/create-github-app-token@v1
                 with:
-                    app_id: ${{ secrets.kybot-app_id }}
+                    app_id: 960836
                     private_key: ${{ secrets.kybot-private_key }}
 
             -   name: Cache Dependencies
@@ -120,7 +120,7 @@ jobs:
                 id: github-token
                 uses: actions/create-github-app-token@v1
                 with:
-                    app_id: ${{ secrets.kybot-app_id }}
+                    app_id: 960836
                     private_key: ${{ secrets.kybot-private_key }}
 
             -   name: Get Action URL
