@@ -8,4 +8,4 @@ vite.config.ts
 
 .idea
 .yarn
-src/tests
+src
