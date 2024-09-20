@@ -9,3 +9,6 @@ vite.config.ts
 .idea
 .yarn
 src
+
+# vitest
+dist/tests
