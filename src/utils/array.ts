@@ -6,3 +6,8 @@ export const toFlatArray = <T>(array: T[] | T[][]): T[] => {
 export const range = (num: number): number[] => {
     return [...Array(num).keys()];
 };
+
+export const array = {
+    toFlatArray,
+    range
+};
