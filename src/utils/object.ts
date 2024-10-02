@@ -1,4 +1,4 @@
-export const getKeys = <T extends { [key: string|number]: any }>(v: T): (keyof T)[] => {
+export const getKeys = <T extends Record<string, any>>(v: T): (keyof T)[] => {
     return Object.keys(v);
 };
 
