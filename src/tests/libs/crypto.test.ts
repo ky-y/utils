@@ -60,6 +60,7 @@ describe("Crypto", () => {
             process.env["SECRET_KEY"] = key1;
             const encrypted = Crypto.encrypt(value, key2);
             const decrypted = Crypto.decrypt(encrypted, key2);
+            delete process.env["SECRET_KEY"];
 
             expect(decrypted).toBe(value);
         });
