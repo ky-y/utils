@@ -1,6 +1,6 @@
-import { toFlatArray } from "~/utils/array";
+import { sort } from "fast-sort";
 
-import { sort } from "~/libs/sort";
+import { toFlatArray } from "~/utils/array";
 
 
 export const sum = (...vals: number[] | number[][]): number => {
