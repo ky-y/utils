@@ -343,7 +343,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.0.0"
     eslint: "npm:^8.57.0"
     eslint-plugin-import: "npm:^2.29.1"
-    fast-sort: "npm:^3.4.0"
+    fast-sort: "npm:^3.4.1"
     npm-run-all: "npm:^4.1.5"
     typescript: "npm:^5.5.4"
     uuid: "npm:^10.0.0"
@@ -2045,10 +2045,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-sort@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "fast-sort@npm:3.4.0"
-  checksum: 10c0/241c4dfed2285559c4111ff4457bf02dee3b7abb375ceda2d1c236b1b1580de79dd5f14eb00cafef14e3471ba5babfba23ceb417fc3047ad4dd0edb38e49bdfc
+"fast-sort@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "fast-sort@npm:3.4.1"
+  checksum: 10c0/322aeff3c266e2bcb39cbf377f9935bfa15e20c4201f548952719658b85d8bef999d88bdf714f2c11ade3261bcf807898833f5889a8ca6b076e78732bc4ce09c
   languageName: node
   linkType: hard
 
