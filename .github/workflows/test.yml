@@ -53,7 +53,7 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
 
             - name: Eslint Check
-              run: bun run eslint
+              run: bun run lint
 
 
     vitest:

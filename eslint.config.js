@@ -1,12 +1,12 @@
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import _import from "eslint-plugin-import";
 import { fixupPluginRules } from "@eslint/compat";
-import globals from "globals";
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import _import from "eslint-plugin-import";
+import globals from "globals";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,28 +17,28 @@ const compat = new FlatCompat({
 });
 
 export default [{
-    ignores: ["**/node_modules", "**/dist"],
+    ignores: ["**/node_modules", "**/dist"]
 }, ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended"), {
     plugins: {
         "@typescript-eslint": typescriptEslint,
-        import: fixupPluginRules(_import),
+        import: fixupPluginRules(_import)
     },
 
     languageOptions: {
         globals: {
             ...globals.browser,
-            ...globals.node,
+            ...globals.node
         },
 
         parser: tsParser,
         ecmaVersion: 12,
-        sourceType: "module",
+        sourceType: "module"
     },
 
     settings: {
         react: {
-            version: "detect",
-        },
+            version: "detect"
+        }
     },
 
     rules: {
@@ -46,13 +46,13 @@ export default [{
         "linebreak-style": ["error", "unix"],
 
         quotes: ["error", "double", {
-            allowTemplateLiterals: true,
+            allowTemplateLiterals: true
         }],
 
         semi: ["error", "always"],
 
         "object-curly-spacing": ["error", "always", {
-            objectsInObjects: false,
+            objectsInObjects: false
         }],
 
         "comma-dangle": ["error", "never"],
@@ -62,7 +62,7 @@ export default [{
             ignoreCase: true,
             ignoreDeclarationSort: true,
             ignoreMemberSort: false,
-            memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+            memberSyntaxSortOrder: ["none", "all", "multiple", "single"]
         }],
 
         "import/order": ["error", {
@@ -71,37 +71,37 @@ export default [{
             pathGroups: [{
                 pattern: "~/utils/**",
                 group: "parent",
-                position: "before",
+                position: "before"
             }, {
                 pattern: "~/components/**",
                 group: "parent",
-                position: "before",
+                position: "before"
             }, {
                 pattern: "~/styles/**",
                 group: "parent",
-                position: "before",
+                position: "before"
             }, {
                 pattern: "./components/**",
                 group: "parent",
-                position: "before",
+                position: "before"
             }, {
                 pattern: "./styles/**",
                 group: "parent",
-                position: "before",
+                position: "before"
             }, {
                 pattern: "./assets/**",
                 group: "parent",
-                position: "before",
+                position: "before"
             }],
 
             pathGroupsExcludedImportTypes: [],
 
             alphabetize: {
-                order: "asc",
+                order: "asc"
             },
 
             "newlines-between": "always",
-            warnOnUnassignedImports: true,
-        }],
-    },
+            warnOnUnassignedImports: true
+        }]
+    }
 }];
