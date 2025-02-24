@@ -1,13 +1,10 @@
 vite.config.ts
 .gitignore
 .github
-.eslintrc.cjs
-.eslintignore
+eslint.config.mjs
 .gitattributes
-.yarnrc.yml
 
 .idea
-.yarn
 src
 
 # vitest

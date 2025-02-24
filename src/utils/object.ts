@@ -1,9 +1,9 @@
-export const getKeys = <T extends Record<string, any>>(v: T): (keyof T)[] => {
+export const getKeys = <T extends Record<string, unknown>>(v: T): (keyof T)[] => {
     return Object.keys(v);
 };
 
 
-export const forEach = <T extends { [key: string|number]: any }>(
+export const forEach = <T extends { [key: string|number]: unknown }>(
     v: T,
     func: <V extends keyof T>(
         value: T[V],
@@ -16,7 +16,7 @@ export const forEach = <T extends { [key: string|number]: any }>(
 };
 
 
-export const map = <T extends { [key: string|number]: any }, V extends any>(
+export const map = <T extends { [key: string|number]: unknown }, V>(
     v: T,
     func: <U extends keyof T>(
         value: T[U],
@@ -32,16 +32,6 @@ export const map = <T extends { [key: string|number]: any }, V extends any>(
     });
 
     return result;
-};
-
-
-export const forEachAsync = async (V: any) => {
-
-};
-
-
-export const mapAsync = async(V: any) => {
-
 };
 
 export const object = {
