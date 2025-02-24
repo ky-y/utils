@@ -9,7 +9,7 @@ updates:
           timezone: "Asia/Tokyo"
       groups:
           dependencies:
-          patterns:
-              - "*"
+              patterns:
+                  - "*"
       reviewers:
           - "kyoya0819"
