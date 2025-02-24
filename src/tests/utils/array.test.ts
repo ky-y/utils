@@ -1,7 +1,7 @@
-import { expect, test } from "vitest";
 import { sort } from "fast-sort";
+import { expect, test } from "vitest";
 
-import { range, toFlatArray, shuffle } from "~/utils";
+import { range, shuffle, toFlatArray } from "~/utils";
 
 test("Positive Testing: range", () => {
     expect(range(5)).toStrictEqual([0, 1, 2, 3, 4]);

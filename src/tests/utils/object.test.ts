@@ -1,6 +1,6 @@
 import { assertType, expect, test } from "vitest";
 
-import { getKeys, forEach, map } from "~/utils";
+import { forEach, getKeys, map } from "~/utils";
 
 
 test("Positive Testing: getKeys", () => {
@@ -26,7 +26,7 @@ test("Positive Testing: forEach", () => {
         expect(v2).toBe(getKeys(test_object_1)[i]);
         expect(v1).toBe(test_object_1[
             getKeys(test_object_1)[i]
-            ]);
+        ]);
         i++;
     });
 });
@@ -42,7 +42,7 @@ test("Positive Testing: map", () => {
         expect(v2).toBe(getKeys(test_object_1)[i]);
         expect(v1).toBe(test_object_1[
             getKeys(test_object_1)[i]
-            ]);
+        ]);
         i++;
         return "aiueo";
     });

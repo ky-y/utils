@@ -19,16 +19,18 @@ jobs:
               with:
                   node-version: '22'
 
+            - uses: oven-sh/setup-bun@v2
+
             - name: Cache Dependencies
-              id: yarn_cache
+              id: bun_cache
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
 
             - name: Install Dependencies
-              if: steps.yarn_cache.outputs.cache-hit != 'true'
-              run: yarn install
+              if: steps.bun_cache.outputs.cache-hit != 'true'
+              run: bun install --frozen-lockfile
 
 
     eslint:
@@ -42,14 +44,16 @@ jobs:
               with:
                   node-version: '22'
 
+            - uses: oven-sh/setup-bun@v2
+
             - name: Restore Cache Dependencies
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
 
             - name: Eslint Check
-              run: yarn eslint
+              run: bun run lint
 
 
     vitest:
@@ -63,14 +67,16 @@ jobs:
               with:
                   node-version: '22'
 
+            - uses: oven-sh/setup-bun@v2
+
             - name: Restore Cache Dependencies
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
 
             - name: Vitest Check
-              run: yarn test
+              run: bun run test
 
 
     build:
@@ -84,11 +90,13 @@ jobs:
               with:
                   node-version: '22'
 
+            - uses: oven-sh/setup-bun@v2
+
             - name: Restore Cache Dependencies
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
 
             - name: Build Check
-              run: yarn build
+              run: bun run build
