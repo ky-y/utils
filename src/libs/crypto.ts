@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-const default_algorithm = "aes-256-cbc";
+const default_algorithm: algorithms = "aes-256-cbc";
 
 export type algorithms = "aes-256-cbc" | "aes-128-cbc" | "aes-192-cbc";
 
