@@ -15,11 +15,9 @@ test("Positive Testing: toFlatArray", () => {
     expect(toFlatArray(b)).toStrictEqual([0, 1, 2, 3, 4, 5, 6]);
 });
 
-
 test("Positive Testing: shuffle", () => {
     const test = [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-        10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
     ];
 
     expect(shuffle(test)).not.toStrictEqual(test);

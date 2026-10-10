@@ -2,12 +2,13 @@
     "compilerOptions": {
         "target": "es2019",
         "module": "es2022",
-        "types": [
-            "vite/client"
-        ],
+        "types": ["vite/client", "node"],
         "outDir": "./dist",
+        "rootDir": "./src",
+        "noEmit": true,
         "baseUrl": "./",
         "esModuleInterop": true,
+        "ignoreDeprecations": "6.0",
         "moduleResolution": "bundler",
         "forceConsistentCasingInFileNames": true,
         "strict": true,
@@ -16,7 +17,5 @@
             "~/*": ["./src/*"]
         }
     },
-    "include": [
-        "src/**/*.ts"
-    ]
+    "include": ["src/**/*.ts"]
 }
