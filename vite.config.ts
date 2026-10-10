@@ -1,19 +1,22 @@
 import { resolve } from "node:path";
 import dts from "vite-plugin-dts";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
-    plugins: [dts(), tsconfigPaths()],
+    plugins: [dts({ exclude: ["src/tests/**", "node_modules/**"] })],
+    resolve: {
+        tsconfigPaths: true,
+    },
     build: {
         lib: {
             entry: {
-                index: resolve(__dirname, "src/index.ts"),
+                index: resolve(import.meta.dirname, "src/index.ts"),
             },
             formats: ["es", "cjs"],
         },
         rolldownOptions: {
-            external: ["fast-sort", "uuid"],
+            // Keep Node built-ins as imports. Otherwise Vite replaces them with empty browser stubs.
+            external: ["fast-sort", "uuid", /^node:/],
         },
     },
     test: {
