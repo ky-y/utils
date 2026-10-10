@@ -1,7 +1,7 @@
 vite.config.ts
 .gitignore
 .github
-eslint.config.js
+biome.json
 .gitattributes
 
 .idea

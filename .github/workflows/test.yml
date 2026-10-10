@@ -1,4 +1,4 @@
-name: Test (Eslint, Vitest, Build)
+name: Test (Biome, Vitest, Build)
 
 on:
     push:
@@ -19,21 +19,21 @@ jobs:
               with:
                   node-version: '22'
 
-            - uses: oven-sh/setup-bun@v2
+            - uses: pnpm/action-setup@v4
 
             - name: Cache Dependencies
-              id: bun_cache
+              id: pnpm_cache
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
 
             - name: Install Dependencies
-              if: steps.bun_cache.outputs.cache-hit != 'true'
-              run: bun install --frozen-lockfile
+              if: steps.pnpm_cache.outputs.cache-hit != 'true'
+              run: pnpm install --frozen-lockfile
 
 
-    eslint:
+    biome:
         runs-on: ubuntu-latest
         needs:
             - setup
@@ -44,16 +44,16 @@ jobs:
               with:
                   node-version: '22'
 
-            - uses: oven-sh/setup-bun@v2
+            - uses: pnpm/action-setup@v4
 
             - name: Restore Cache Dependencies
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-            - name: Eslint Check
-              run: bun run lint
+            - name: Biome Check
+              run: pnpm lint
 
 
     vitest:
@@ -67,16 +67,16 @@ jobs:
               with:
                   node-version: '22'
 
-            - uses: oven-sh/setup-bun@v2
+            - uses: pnpm/action-setup@v4
 
             - name: Restore Cache Dependencies
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
 
             - name: Vitest Check
-              run: bun run test
+              run: pnpm test
 
 
     build:
@@ -90,13 +90,13 @@ jobs:
               with:
                   node-version: '22'
 
-            - uses: oven-sh/setup-bun@v2
+            - uses: pnpm/action-setup@v4
 
             - name: Restore Cache Dependencies
               uses: actions/cache@v4
               with:
                   path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
 
             - name: Build Check
-              run: bun run build
+              run: pnpm build
